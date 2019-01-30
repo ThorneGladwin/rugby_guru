@@ -1,0 +1,50 @@
+{
+    "version": "1.0",
+    "session": {
+      "new": false,
+      "sessionId": "sessionId",
+      "application": {
+        "applicationId": "appId"
+      },
+      "user": {
+        "userId": "userId",
+        "accessToken": "token"
+      }
+    },
+    "context": {
+      "AudioPlayer": {
+        "playerActivity": "IDLE"
+      },
+      "Display": {
+        "token": ""
+      },
+      "System": {
+        "application": {
+          "applicationId": "appId"
+        },
+        "user": {
+          "userId": "userId"
+        },
+        "device": {
+          "deviceId": "deviceId",
+          "supportedInterfaces": {
+            "AudioPlayer": {},
+            "Display": {
+              "templateVersion": "1.0",
+              "markupVersion": "1.0"
+            }
+          }
+        },
+        "apiEndpoint": "https://api.amazonalexa.com",
+        "apiAccessToken": "accessToken"
+      }
+    },
+    "request": {
+      "type": "LaunchRequest",
+      "requestId": "requestId",
+      "timestamp": "2018-06-01T08:52:30Z",
+      "locale": "en-GB",
+      "shouldLinkResultBeReturned": false
+    },
+    "dialogState": "STARTED"
+  }
