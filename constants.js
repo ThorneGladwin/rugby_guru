@@ -26,9 +26,12 @@ const MONTHS = [
     "October",
     "November",
     "December"
-]
+];
+
+const PREM_FIXTURES_URL = 'https://en.wikipedia.org/wiki/2018%E2%80%9319_Premiership_Rugby';
 
 module.exports = {
     LIST_OF_TEAMS,
-    MONTHS
+    MONTHS,
+    PREM_FIXTURES_URL
 };

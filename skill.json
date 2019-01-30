@@ -1,0 +1,31 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-GB": {
+          "summary": "Your personal rugby expert",
+          "examplePhrases": [
+            "Alexa, open rugby guru",
+            "Alexa, ask rugby guru who saints are playing next",
+            "Alexa, ask rugby guru if saracens won their last game"
+          ],
+          "name": "rugby_guru",
+          "description": "Rugby Guru allows you to keep up to date with the fixtures for your favourite team. Why don't you try asking what their last result was? Or who they are playing next?"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Sample Testing Instructions.",
+      "category": "SPORTS_NEWS",
+      "distributionCountries": [ "GB" ]
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/custom",
+          "uri": "arn:aws:lambda:eu-west-1:146448801642:function:rugbyGuru"
+        }
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}
