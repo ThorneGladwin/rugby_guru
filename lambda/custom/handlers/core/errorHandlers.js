@@ -1,3 +1,5 @@
+const { Errors } = require("../../resources/errorIntents");
+
 const ErrorHandler = {
   canHandle() {
     return true;
@@ -6,8 +8,8 @@ const ErrorHandler = {
     console.log(`Error handled: ${error.message}`);
 
     return handlerInput.responseBuilder
-      .speak("Sorry, I can't understand the command. Please say again.")
-      .reprompt("Sorry, I can't understand the command. Please say again.")
+      .speak(Errors.GenericError)
+      .withShouldEndSession(true)
       .getResponse();
   }
 };

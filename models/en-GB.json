@@ -13,9 +13,7 @@
         },
         {
           "name": "AMAZON.HelpIntent",
-          "samples": [
-            "Help me please"
-          ]
+          "samples": []
         },
         {
           "name": "AMAZON.StopIntent",
@@ -24,9 +22,74 @@
         {
           "name": "AMAZON.NavigateHomeIntent",
           "samples": []
+        },
+        {
+          "name": "NextFixtureIntent",
+          "slots": [
+            {
+              "name": "Teams",
+              "type": "Teams",
+              "samples": [
+                "{Teams}"
+              ]
+            }
+          ],
+          "samples": [
+            "what is the next fixture for {Teams}",
+            "what is the next fixture",
+            "what is the next game",
+            "who are {Teams} playing next"
+          ]
         }
       ],
-      "types": []
-    }
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "Northampton Saints",
+                "synonyms": [
+                  "saints",
+                  "northampton"
+                ]
+              }
+            }
+          ],
+          "name": "Teams"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "NextFixtureIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "Teams",
+              "type": "Teams",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.915367132704.436306799187"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.915367132704.436306799187",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Sure. What team would you like to know?"
+          }
+        ]
+      }
+    ]
   }
 }
