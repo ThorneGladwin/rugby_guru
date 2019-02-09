@@ -38,7 +38,8 @@
             "what is the next fixture for {Teams}",
             "what is the next fixture",
             "what is the next game",
-            "who are {Teams} playing next"
+            "who are {Teams} playing next",
+            "next fixture"
           ]
         }
       ],

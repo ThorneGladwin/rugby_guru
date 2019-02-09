@@ -5,10 +5,18 @@ const {
   CancelAndStopIntentHandler,
   SessionEndedRequestHandler,
   FallbackIntentHandler
-} = require("./handlers/core/coreHandlers");
-const { ErrorHandler } = require("./handlers/core/errorHandlers");
+} = require("./handlers/coreHandlers");
+const { NextFixtureIntentHandler } = require("./handlers/customHandlers");
+const { ErrorHandler } = require("./handlers/errorHandler");
 
 exports.handler = Alexa.SkillBuilders.custom()
-  .addRequestHandlers(LaunchRequestHandler, HelpIntentHandler, CancelAndStopIntentHandler, SessionEndedRequestHandler, FallbackIntentHandler)
+  .addRequestHandlers(
+    LaunchRequestHandler,
+    HelpIntentHandler,
+    CancelAndStopIntentHandler,
+    SessionEndedRequestHandler,
+    FallbackIntentHandler,
+    NextFixtureIntentHandler
+  )
   .addErrorHandlers(ErrorHandler)
   .lambda();

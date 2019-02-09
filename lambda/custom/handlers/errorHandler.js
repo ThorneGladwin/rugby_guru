@@ -1,4 +1,4 @@
-const { Errors } = require("../../resources/errorIntents");
+const { Errors } = require("../resources/errorIntent");
 
 const ErrorHandler = {
   canHandle() {
