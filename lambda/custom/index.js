@@ -8,6 +8,7 @@ const {
 } = require("./handlers/coreHandlers");
 const { NextFixtureIntentHandler } = require("./handlers/customHandlers");
 const { ErrorHandler } = require("./handlers/errorHandler");
+const { dynamoDb } = require("./persistenceAdapters/dynamoDb");
 
 exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
@@ -19,4 +20,5 @@ exports.handler = Alexa.SkillBuilders.custom()
     NextFixtureIntentHandler
   )
   .addErrorHandlers(ErrorHandler)
+  .withPersistenceAdapter(dynamoDb)
   .lambda();
