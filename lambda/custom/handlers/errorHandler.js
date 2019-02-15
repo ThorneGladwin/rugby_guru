@@ -1,4 +1,4 @@
-const { Errors } = require("../resources/errorIntent");
+const { ErrorsSpeech } = require("../resources/errorIntent");
 
 const ErrorHandler = {
   canHandle() {
@@ -8,7 +8,7 @@ const ErrorHandler = {
     console.log(`Error handled: ${error.message}`);
 
     return handlerInput.responseBuilder
-      .speak(Errors.GenericError)
+      .speak(ErrorsSpeech.GenericError)
       .withShouldEndSession(true)
       .getResponse();
   }
