@@ -10,7 +10,7 @@ const CoreIntentsSpeech = {
     If you need help. Just say "help". To get started just say, "Next Fixture", or. "Last Result".
     `,
   Introduction: `
-    Hi. Welcome back to the Rugby Guru. What can I help with today?
+    Hi. Welcome back to the Rugby Guru. What can I help you with today?
   `,
   IntroductionFallback: `
     If you are unsure with what to do, just say "help". What can I help you with?
@@ -28,6 +28,12 @@ const CoreIntentsSpeech = {
   `,
   Fallback: `
     Sorry, I didn't understand that. Why don't you try saying it again?
+  `,
+  MatchedMultipleTeams: options => `
+  That has matched multiple teams. They are ${options}. Which one would you like to pick?
+  `,
+  AnyMoreHelp: `
+  What else can I help you with?
   `
 };
 

@@ -1,170 +1,214 @@
 {
   "interactionModel": {
-      "languageModel": {
-          "invocationName": "rugby guru",
-          "intents": [
-              {
-                  "name": "AMAZON.FallbackIntent",
-                  "samples": []
-              },
-              {
-                  "name": "AMAZON.CancelIntent",
-                  "samples": []
-              },
-              {
-                  "name": "AMAZON.HelpIntent",
-                  "samples": []
-              },
-              {
-                  "name": "AMAZON.StopIntent",
-                  "samples": []
-              },
-              {
-                  "name": "AMAZON.NavigateHomeIntent",
-                  "samples": []
-              },
-              {
-                  "name": "NextFixtureIntent",
-                  "slots": [
-                      {
-                          "name": "Teams",
-                          "type": "Teams",
-                          "samples": [
-                              "{Teams}"
-                          ]
-                      }
-                  ],
-                  "samples": [
-                      "what is the next fixture for {Teams}",
-                      "what is the next fixture",
-                      "what is the next game",
-                      "who are {Teams} playing next",
-                      "next fixture"
-                  ]
-              },
-              {
-                  "name": "SetFavouriteTeamIntent",
-                  "slots": [
-                      {
-                          "name": "Teams",
-                          "type": "Teams",
-                          "samples": [
-                              "{Teams} please",
-                              "{Teams} is my favourite team",
-                              "I want to set {Teams} as my favourite",
-                              "{Teams}"
-                          ]
-                      }
-                  ],
-                  "samples": [
-                      "save {Teams} as my favourite team",
-                      "save my favourite team",
-                      "set the team I support",
-                      "set my team",
-                      "set my favourite team",
-                      "{Teams} is my favourite",
-                      "{Teams} is my favourite team",
-                      "set {Teams} as my favourite",
-                      "set {Teams} as my favourite team"
-                  ]
-              },
-              {
-                  "name": "GetFavouriteTeamIntent",
-                  "slots": [],
-                  "samples": [
-                      "who I set as my favourite team",
-                      "what's the team I support",
-                      "what team do I support",
-                      "who do I support",
-                      "what's my favourite team",
-                      "who did I set as my favourite team",
-                      "what is my favourite team"
-                  ]
-              }
+    "languageModel": {
+      "invocationName": "rugby guru",
+      "intents": [
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "NextFixtureIntent",
+          "slots": [
+            {
+              "name": "Teams",
+              "type": "Teams",
+              "samples": ["{Teams}"]
+            }
           ],
-          "types": [
-              {
-                  "name": "Teams",
-                  "values": [
-                      {
-                          "name": {
-                              "value": "Wasps",
-                              "synonyms": [
-                                  "the wasps",
-                                  "london wasps"
-                              ]
-                          }
-                      },
-                      {
-                          "name": {
-                              "value": "Northampton Saints",
-                              "synonyms": [
-                                  "the saints",
-                                  "saints",
-                                  "northampton"
-                              ]
-                          }
-                      }
-                  ]
-              }
+          "samples": [
+            "what is the next fixture for {Teams}",
+            "what is the next fixture",
+            "what is the next game",
+            "who are {Teams} playing next",
+            "next fixture"
           ]
-      },
-      "dialog": {
-          "intents": [
-              {
-                  "name": "NextFixtureIntent",
-                  "confirmationRequired": false,
-                  "prompts": {},
-                  "slots": [
-                      {
-                          "name": "Teams",
-                          "type": "Teams",
-                          "confirmationRequired": false,
-                          "elicitationRequired": true,
-                          "prompts": {
-                              "elicitation": "Elicit.Slot.915367132704.436306799187"
-                          }
-                      }
-                  ]
-              },
-              {
-                  "name": "SetFavouriteTeamIntent",
-                  "confirmationRequired": false,
-                  "prompts": {},
-                  "slots": [
-                      {
-                          "name": "Teams",
-                          "type": "Teams",
-                          "confirmationRequired": false,
-                          "elicitationRequired": true,
-                          "prompts": {
-                              "elicitation": "Elicit.Slot.1170176477733.1019367016641"
-                          }
-                      }
-                  ]
-              }
+        },
+        {
+          "name": "SetFavouriteTeamIntent",
+          "slots": [
+            {
+              "name": "Teams",
+              "type": "Teams",
+              "samples": ["{Teams} please", "{Teams} is my favourite team", "I want to set {Teams} as my favourite", "{Teams}"]
+            }
           ],
-          "delegationStrategy": "ALWAYS"
-      },
-      "prompts": [
-          {
-              "id": "Elicit.Slot.915367132704.436306799187",
-              "variations": [
-                  {
-                      "type": "PlainText",
-                      "value": "Sure. What team would you like to know?"
-                  }
-              ]
-          },
-          {
-              "id": "Elicit.Slot.1170176477733.1019367016641",
-              "variations": [
-                  {
-                      "type": "PlainText",
-                      "value": "Sure, what team would you like to set as your favourite?"
-                  }
-              ]
-          }
+          "samples": [
+            "save {Teams} as my favourite team",
+            "save my favourite team",
+            "set the team I support",
+            "set my team",
+            "set my favourite team",
+            "{Teams} is my favourite",
+            "{Teams} is my favourite team",
+            "set {Teams} as my favourite",
+            "set {Teams} as my favourite team"
+          ]
+        },
+        {
+          "name": "GetFavouriteTeamIntent",
+          "slots": [],
+          "samples": [
+            "who I set as my favourite team",
+            "what's the team I support",
+            "what team do I support",
+            "who do I support",
+            "what's my favourite team",
+            "who did I set as my favourite team",
+            "what is my favourite team"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "Teams",
+          "values": [
+            {
+              "name": {
+                "value": "Worcester Warriors",
+                "synonyms": ["warriors", "worcester", "the warriors"]
+              }
+            },
+            {
+              "name": {
+                "value": "Saracens"
+              }
+            },
+            {
+              "name": {
+                "value": "Sale Sharks",
+                "synonyms": ["sharks", "the sharks", "sale"]
+              }
+            },
+            {
+              "name": {
+                "value": "Newcastle Falcons",
+                "synonyms": ["falcons", "the falcons", "newcastle"]
+              }
+            },
+            {
+              "name": {
+                "value": "Leicester Tigers",
+                "synonyms": ["tigers", "the tigers", "leicester"]
+              }
+            },
+            {
+              "name": {
+                "value": "Harlequins"
+              }
+            },
+            {
+              "name": {
+                "value": "Gloucester",
+                "synonyms": ["gloucester lions"]
+              }
+            },
+            {
+              "name": {
+                "value": "Exeter Chiefs",
+                "synonyms": ["chiefs", "the chiefs", "exeter"]
+              }
+            },
+            {
+              "name": {
+                "value": "Bristol Bears",
+                "synonyms": ["bears", "the bears", "bristol"]
+              }
+            },
+            {
+              "name": {
+                "value": "Bath"
+              }
+            },
+            {
+              "name": {
+                "value": "Wasps",
+                "synonyms": ["the wasps", "london wasps"]
+              }
+            },
+            {
+              "name": {
+                "value": "Northampton Saints",
+                "synonyms": ["the saints", "saints", "northampton"]
+              }
+            }
+          ]
+        }
       ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "NextFixtureIntent",
+          "delegationStrategy": "SKILL_RESPONSE",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "Teams",
+              "type": "Teams",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.915367132704.436306799187"
+              }
+            }
+          ]
+        },
+        {
+          "name": "SetFavouriteTeamIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "Teams",
+              "type": "Teams",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1170176477733.1019367016641"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.915367132704.436306799187",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Sure. What team would you like to know?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1170176477733.1019367016641",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Sure, what team would you like to set as your favourite?"
+          }
+        ]
+      }
+    ]
   }
 }

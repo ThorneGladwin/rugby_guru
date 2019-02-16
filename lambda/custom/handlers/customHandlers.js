@@ -1,6 +1,9 @@
 const get = require("lodash/get");
-const { getTeamSlot } = require("../helpers/slotHelperFunctions");
-const { SetFavouriteTeamIntentSpeech, GetFavouriteTeamIntentSpeech } = require("../resources/customIntents");
+const { getTeamSlotValues, getTeamSlot } = require("../helpers/slotHelperFunctions");
+const { getNextFixtureForTeam } = require("../helpers/scraperHelperFunctions");
+const { constructNextFixtureResponse } = require("../helpers/responseHelperFunctions");
+const { SetFavouriteTeamIntentSpeech, GetFavouriteTeamIntentSpeech, customIntentsSpeech } = require("../resources/customIntents");
+const { CoreIntentsSpeech } = require("../resources/coreIntents");
 const { ErrorsSpeech } = require("../resources/errorIntent");
 
 const NextFixtureIntentHandler = {
@@ -8,25 +11,49 @@ const NextFixtureIntentHandler = {
     return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "NextFixtureIntent";
   },
   handle(handlerInput) {
-    const teamSlot = getTeamSlot(handlerInput);
-    if (teamSlot.status === "ER_SUCCESS_MATCH") {
-      if (teamSlot.values.length > 0) {
-        if (teamSlot.values.length > 1) {
-          const values = teamSlot.values.map(i => i.value.name);
-          const lastOption = values.pop();
-          const possibleOptions = values.join(", ") + " and" + lastOption;
-          return handlerInput.responseBuilder
-            .speak(`That has matched multiple teams. They are ${possibleOptions}. Which one would you like?`)
-            .addElicitSlotDirective("Teams")
-            .getResponse();
-        }
-        return handlerInput.responseBuilder.speak(`Great. you have picked ${teamSlot.values[0].value.name}`).getResponse();
+    return handlerInput.attributesManager.getPersistentAttributes().then(attributes => {
+      const favouriteTeam = get(attributes, ["favouriteTeam"]);
+      const teamSlot = getTeamSlot(handlerInput);
+
+      if (favouriteTeam && !teamSlot.value) {
+        return getNextFixtureForTeam(favouriteTeam).then(result => {
+          return constructNextFixtureResponse(handlerInput, favouriteTeam, result);
+        });
       }
-    }
-    return handlerInput.responseBuilder
-      .speak("Sorry, I didn't catch that. What team would you like?")
-      .addElicitSlotDirective("Teams")
-      .getResponse();
+
+      if (teamSlot.value) {
+        const teamSlotValues = getTeamSlotValues(handlerInput);
+        if (teamSlotValues.status === "ER_SUCCESS_MATCH") {
+          if (teamSlotValues.values.length > 0) {
+            if (teamSlotValues.values.length > 1) {
+              const values = teamSlotValues.values.map(i => i.value.name);
+              const lastOption = values.pop();
+              const possibleOptions = values.join(", ") + " and" + lastOption;
+              return handlerInput.responseBuilder
+                .speak(CoreIntentsSpeech.MatchedMultipleTeams(possibleOptions))
+                .reprompt(CoreIntentsSpeech.MatchedMultipleTeams(possibleOptions))
+                .addElicitSlotDirective("Teams")
+                .getResponse();
+            }
+            const selectedTeam = teamSlotValues.values[0].value.name;
+            return getNextFixtureForTeam(selectedTeam).then(result => {
+              return constructNextFixtureResponse(handlerInput, selectedTeam, result);
+            });
+          }
+        }
+        return handlerInput.responseBuilder
+          .speak(customIntentsSpeech.GetTeamSlotMisunderstood)
+          .reprompt(customIntentsSpeech.GetTeamSlotMisunderstood)
+          .addElicitSlotDirective("Teams")
+          .getResponse();
+      }
+
+      return handlerInput.responseBuilder
+        .speak(customIntentsSpeech.GetTeamSlot)
+        .reprompt(customIntentsSpeech.GetTeamSlot)
+        .addElicitSlotDirective("Teams")
+        .getResponse();
+    });
   }
 };
 
@@ -37,7 +64,7 @@ const SetFavouriteTeamIntentHandler = {
     );
   },
   handle(handlerInput) {
-    const teamSlot = getTeamSlot(handlerInput);
+    const teamSlot = getTeamSlotValues(handlerInput);
 
     if (teamSlot.status === "ER_SUCCESS_MATCH") {
       if (teamSlot.values.length > 0) {
@@ -46,8 +73,8 @@ const SetFavouriteTeamIntentHandler = {
           const lastOption = values.pop();
           const possibleOptions = values.join(", ") + " and" + lastOption;
           return handlerInput.responseBuilder
-            .speak(SetFavouriteTeamIntentSpeech.MatchedMultipleTeams(possibleOptions))
-            .reprompt(SetFavouriteTeamIntentSpeech.MatchedMultipleTeams(possibleOptions))
+            .speak(CoreIntentsSpeech.MatchedMultipleTeams(possibleOptions))
+            .reprompt(CoreIntentsSpeech.MatchedMultipleTeams(possibleOptions))
             .addElicitSlotDirective("Teams")
             .getResponse();
         }
@@ -66,7 +93,7 @@ const SetFavouriteTeamIntentHandler = {
           .then(() => {
             return handlerInput.responseBuilder
               .speak(SetFavouriteTeamIntentSpeech.FavouriteTeamSelected(favouriteTeam))
-              .reprompt(SetFavouriteTeamIntentSpeech.FavouriteTeamSelectedReprompt)
+              .reprompt(CoreIntentsSpeech.AnyMoreHelp)
               .getResponse();
           })
           .catch(error => {
@@ -79,8 +106,8 @@ const SetFavouriteTeamIntentHandler = {
       }
     }
     return handlerInput.responseBuilder
-      .speak(SetFavouriteTeamIntentSpeech.GetTeamSlot)
-      .reprompt(SetFavouriteTeamIntentSpeech.GetTeamSlotReprompt)
+      .speak(customIntentsSpeech.GetTeamSlotMisunderstood)
+      .reprompt(customIntentsSpeech.GetTeamSlotMisunderstood)
       .addElicitSlotDirective("Teams")
       .getResponse();
   }

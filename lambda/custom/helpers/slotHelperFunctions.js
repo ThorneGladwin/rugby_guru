@@ -1,6 +1,6 @@
 const get = require("lodash/get");
 
-const getTeamSlot = handlerInput => {
+const getTeamSlotValues = handlerInput => {
   const resolutions = get(handlerInput, ["requestEnvelope", "request", "intent", "slots", "Teams", "resolutions", "resolutionsPerAuthority"], []);
 
   if (resolutions.length > 0) {
@@ -17,6 +17,11 @@ const getTeamSlot = handlerInput => {
   };
 };
 
+const getTeamSlot = handlerInoput => {
+  return get(handlerInoput, ["requestEnvelope", "request", "intent", "slots", "Teams"]);
+};
+
 module.exports = {
+  getTeamSlotValues,
   getTeamSlot
 };

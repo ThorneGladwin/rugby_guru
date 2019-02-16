@@ -1,7 +1,7 @@
 const rp = require("request-promise");
 const $ = require("cheerio");
-const { format, isBefore } = require("date-fns");
-const { LIST_OF_TEAMS, MONTHS, PREM_FIXTURES_URL } = require("./constants");
+const { format, isBefore, min } = require("date-fns");
+const { LIST_OF_TEAMS, MONTHS, PREM_FIXTURES_URL } = require("../constants");
 let hasHome = false;
 let hasAway = false;
 let hasDate = false;
@@ -67,21 +67,49 @@ const processNodes = children => {
   }
 };
 
-const getAllFixtures = () => {
-  rp(PREM_FIXTURES_URL)
-    .then(function(html) {
-      const elements = $('div[itemtype="http://schema.org/SportsEvent"]', html);
-      for (i = 0; i < elements.length; i++) {
-        processNodes(elements[i]);
-      }
-      // const northamptonFixtures = allFixtures.filter(item => item.home === "Northampton Saints" || item.away === "Northampton Saints");
-      return allFixtures;
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
+const getFixturesForTeam = team => {
+  if (team) {
+    return rp(PREM_FIXTURES_URL)
+      .then(function(html) {
+        const elements = $('div[itemtype="http://schema.org/SportsEvent"]', html);
+        for (i = 0; i < elements.length; i++) {
+          processNodes(elements[i]);
+        }
+        return allFixtures.filter(item => item.home === team || item.away === team);
+      })
+      .catch(function(err) {
+        console.error(err);
+        return [];
+      });
+  }
+  console.error("getFixturesForTeam: No Team provided");
+  return [];
+};
+
+const getNextFixtureForTeam = team => {
+  return new Promise((resolve, reject) => {
+    if (team) {
+      return getFixturesForTeam(team)
+        .then(allFixtures => {
+          const nextFixtures = allFixtures.filter(i => !i.isPast);
+          let dates = [];
+          nextFixtures.forEach(fixture => {
+            let [day, month, year] = fixture.date.split("-");
+            dates.push(new Date(`${year}/${month}/${day}`));
+          });
+          const nextFixtureDate = min(...dates);
+          const nextFixtureDateFormatted = format(nextFixtureDate, "DD-MM-YYYY");
+          const nextFixture = nextFixtures.find(i => i.date === nextFixtureDateFormatted);
+          return resolve(nextFixture);
+        })
+        .catch(error => {
+          return reject(error);
+        });
+    }
+    return reject("getNextFixtureForTeam: No Team provided");
+  });
 };
 
 module.exports = {
-  getAllFixtures
+  getNextFixtureForTeam
 };
