@@ -1,4 +1,4 @@
-const { ErrorsSpeech } = require("../resources/errorIntent");
+const { ErrorsSpeech } = require("../../resources/errorIntent");
 
 const ErrorHandler = {
   canHandle() {

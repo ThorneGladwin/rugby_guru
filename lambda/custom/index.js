@@ -5,14 +5,14 @@ const {
   CancelAndStopIntentHandler,
   SessionEndedRequestHandler,
   FallbackIntentHandler
-} = require("./handlers/coreHandlers");
+} = require("./handlers/core");
 const {
   NextFixtureIntentHandler,
   SetFavouriteTeamIntentHandler,
   GetFavouriteTeamIntentHandler,
   LastResultIntentHandler
-} = require("./handlers/customHandlers");
-const { ErrorHandler } = require("./handlers/errorHandler");
+} = require("./handlers/custom");
+const { ErrorHandler } = require("./handlers/error");
 const { dynamoDb } = require("./persistenceAdapters/dynamoDb");
 
 exports.handler = Alexa.SkillBuilders.custom()
