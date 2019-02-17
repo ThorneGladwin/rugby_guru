@@ -1,6 +1,6 @@
 const rp = require("request-promise");
 const $ = require("cheerio");
-const { format, isBefore, min } = require("date-fns");
+const { format, isBefore, min, max } = require("date-fns");
 const { LIST_OF_TEAMS, MONTHS, PREM_FIXTURES_URL } = require("../constants");
 let hasHome = false;
 let hasAway = false;
@@ -110,6 +110,31 @@ const getNextFixtureForTeam = team => {
   });
 };
 
+const getLastResultForTeam = team => {
+ return new Promise((resolve, reject) => {
+  if (team) {
+    return getFixturesForTeam(team)
+      .then(allFixtures => {
+        const results = allFixtures.filter(i => i.isPast);
+        let dates = [];
+        results.forEach(fixture => {
+          let [day, month, year] = fixture.date.split("-");
+          dates.push(new Date(`${year}/${month}/${day}`));
+        });
+        const lastResultDate = max(...dates);
+        const lastResultDateFormatted = format(lastResultDate, "DD-MM-YYYY");
+        const lastResult = results.find(i => i.date === lastResultDateFormatted);
+        return resolve(lastResult);
+      })
+      .catch(error => {
+        return reject(error);
+      });
+  }
+  return reject("getLastResultForTeam: No Team provided");
+ });
+};
+
 module.exports = {
-  getNextFixtureForTeam
+  getNextFixtureForTeam,
+  getLastResultForTeam
 };

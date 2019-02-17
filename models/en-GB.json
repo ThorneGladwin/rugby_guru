@@ -73,6 +73,31 @@
             "who did I set as my favourite team",
             "what is my favourite team"
           ]
+        },
+        {
+          "name": "LastResultIntent",
+          "slots": [
+            {
+              "name": "Teams",
+              "type": "Teams",
+              "samples": ["{Teams}"]
+            }
+          ],
+          "samples": [
+            "who did {Teams} play last",
+            "how did {Teams} do in their last game",
+            "did {Teams} lose their last game",
+            "did {Teams} draw their last game",
+            "did {Teams} win their last game",
+            "what was {Teams} last score",
+            "what was {Teams} last result",
+            "what was the last score for {Teams}",
+            "what was the last score",
+            "what was the last result for {Teams}",
+            "what is the last result for {Teams}",
+            "what was the last result",
+            "what is the last result"
+          ]
         }
       ],
       "types": [
@@ -82,7 +107,7 @@
             {
               "name": {
                 "value": "Worcester Warriors",
-                "synonyms": ["warriors", "worcester", "the warriors"]
+                "synonyms": ["worcesters", "warriors", "worcester", "the warriors"]
               }
             },
             {
@@ -93,19 +118,19 @@
             {
               "name": {
                 "value": "Sale Sharks",
-                "synonyms": ["sharks", "the sharks", "sale"]
+                "synonyms": ["sales", "sharks", "the sharks", "sale"]
               }
             },
             {
               "name": {
                 "value": "Newcastle Falcons",
-                "synonyms": ["falcons", "the falcons", "newcastle"]
+                "synonyms": ["newcastles", "falcons", "the falcons", "newcastle"]
               }
             },
             {
               "name": {
                 "value": "Leicester Tigers",
-                "synonyms": ["tigers", "the tigers", "leicester"]
+                "synonyms": ["leicesters", "tigers", "the tigers", "leicester"]
               }
             },
             {
@@ -116,24 +141,25 @@
             {
               "name": {
                 "value": "Gloucester",
-                "synonyms": ["gloucester lions"]
+                "synonyms": ["gloucesters", "gloucester lions"]
               }
             },
             {
               "name": {
                 "value": "Exeter Chiefs",
-                "synonyms": ["chiefs", "the chiefs", "exeter"]
+                "synonyms": ["exeters", "chiefs", "the chiefs", "exeter"]
               }
             },
             {
               "name": {
                 "value": "Bristol Bears",
-                "synonyms": ["bears", "the bears", "bristol"]
+                "synonyms": ["bristols", "bears", "the bears", "bristol"]
               }
             },
             {
               "name": {
-                "value": "Bath"
+                "value": "Bath",
+                "synonyms": ["baths"]
               }
             },
             {
@@ -145,7 +171,7 @@
             {
               "name": {
                 "value": "Northampton Saints",
-                "synonyms": ["the saints", "saints", "northampton"]
+                "synonyms": ["northamptons", "the saints", "saints", "northampton"]
               }
             }
           ]
@@ -186,6 +212,23 @@
               }
             }
           ]
+        },
+        {
+          "name": "LastResultIntent",
+          "delegationStrategy": "SKILL_RESPONSE",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "Teams",
+              "type": "Teams",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.201086763920.1251245359428"
+              }
+            }
+          ]
         }
       ],
       "delegationStrategy": "ALWAYS"
@@ -206,6 +249,15 @@
           {
             "type": "PlainText",
             "value": "Sure, what team would you like to set as your favourite?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.201086763920.1251245359428",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Sure. What team would you like to know?"
           }
         ]
       }
