@@ -2,6 +2,7 @@ const get = require("lodash/get");
 const { getTeamSlotValues, getTeamSlot } = require("../helpers/slotHelperFunctions");
 const { getNextFixtureForTeam } = require("../helpers/scraperHelperFunctions");
 const { constructNextFixtureResponse } = require("../helpers/responseHelperFunctions");
+const { isSessionNew } = require("../helpers/requestHelperFunctions");
 const { SetFavouriteTeamIntentSpeech, GetFavouriteTeamIntentSpeech, customIntentsSpeech } = require("../resources/customIntents");
 const { CoreIntentsSpeech } = require("../resources/coreIntents");
 const { ErrorsSpeech } = require("../resources/errorIntent");
@@ -91,10 +92,15 @@ const SetFavouriteTeamIntentHandler = {
             return handlerInput.attributesManager.savePersistentAttributes();
           })
           .then(() => {
-            return handlerInput.responseBuilder
-              .speak(SetFavouriteTeamIntentSpeech.FavouriteTeamSelected(favouriteTeam))
-              .reprompt(CoreIntentsSpeech.AnyMoreHelp)
-              .getResponse();
+            return isSessionNew(handlerInput)
+              ? handlerInput.responseBuilder
+                  .speak(SetFavouriteTeamIntentSpeech.FavouriteTeamSelected(favouriteTeam))
+                  .withShouldEndSession(true)
+                  .getResponse()
+              : handlerInput.responseBuilder
+                  .speak(SetFavouriteTeamIntentSpeech.FavouriteTeamSelected(favouriteTeam).concat(` ${CoreIntentsSpeech.AnyMoreHelp}`))
+                  .reprompt(CoreIntentsSpeech.AnyMoreHelp)
+                  .getResponse();
           })
           .catch(error => {
             console.error(error);
@@ -125,15 +131,25 @@ const GetFavouriteTeamIntentHandler = {
       .then(attributes => {
         const favouriteTeam = get(attributes, ["favouriteTeam"]);
         if (favouriteTeam) {
-          return handlerInput.responseBuilder
-            .speak(GetFavouriteTeamIntentSpeech.SayFavouriteTeam(favouriteTeam))
-            .reprompt(GetFavouriteTeamIntentSpeech.AnyMoreHelp)
-            .getResponse();
+          return isSessionNew(handlerInput)
+            ? handlerInput.responseBuilder
+                .speak(GetFavouriteTeamIntentSpeech.SayFavouriteTeam(favouriteTeam))
+                .withShouldEndSession(true)
+                .getResponse()
+            : handlerInput.responseBuilder
+                .speak(GetFavouriteTeamIntentSpeech.SayFavouriteTeam(favouriteTeam).concat(` ${CoreIntentsSpeech.AnyMoreHelp}`))
+                .reprompt(CoreIntentsSpeech.AnyMoreHelp)
+                .getResponse();
         }
-        return handlerInput.responseBuilder
-          .speak(GetFavouriteTeamIntentSpeech.NoFavouriteTeam)
-          .reprompt(GetFavouriteTeamIntentSpeech.AnyMoreHelp)
-          .getResponse();
+        return isSessionNew(handlerInput)
+          ? handlerInput.responseBuilder
+              .speak(GetFavouriteTeamIntentSpeech.NoFavouriteTeam)
+              .withShouldEndSession(true)
+              .getResponse()
+          : handlerInput.responseBuilder
+              .speak(GetFavouriteTeamIntentSpeech.NoFavouriteTeam.concat(` ${CoreIntentsSpeech.AnyMoreHelp}`))
+              .reprompt(CoreIntentsSpeech.AnyMoreHelp)
+              .getResponse();
       })
       .catch(error => {
         console.error(error);

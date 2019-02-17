@@ -1,5 +1,7 @@
 const { format, differenceInDays } = require("date-fns");
 const { NextFixtureIntentSpeech } = require("../resources/customIntents");
+const { CoreIntentsSpeech } = require("../resources/coreIntents");
+const { isSessionNew } = require("../helpers/requestHelperFunctions");
 
 const constructNextFixtureResponse = (handlerInput, selectedTeam, fixture) => {
   const isHome = selectedTeam === fixture.home;
@@ -11,7 +13,15 @@ const constructNextFixtureResponse = (handlerInput, selectedTeam, fixture) => {
     ? NextFixtureIntentSpeech.NextFixtureHome(selectedTeam, oppositeTeam, gameDay, daysFromNow)
     : NextFixtureIntentSpeech.NextFixtureAway(selectedTeam, oppositeTeam, gameDay, daysFromNow);
 
-  return handlerInput.responseBuilder.speak(speech).getResponse();
+  return isSessionNew(handlerInput)
+    ? handlerInput.responseBuilder
+        .speak(speech)
+        .withShouldEndSession(true)
+        .getResponse()
+    : handlerInput.responseBuilder
+        .speak(speech.concat(` ${CoreIntentsSpeech.AnyMoreHelp}`))
+        .reprompt(CoreIntentsSpeech.AnyMoreHelp)
+        .getResponse();
 };
 
 module.exports = {
