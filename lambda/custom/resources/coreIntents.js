@@ -1,6 +1,6 @@
 const CoreIntentsSpeech = {
   FirstTimeIntroduction: `
-    Hi. welcome to the rugby guru. For now, I can give you an update on the latest result and next fixture for any team in the Gallagher Premiership.
+    Hi. welcome to the Rugby Guru. For now, I can give you an update on the latest result, and, next fixture for any team in the Gallagher Premiership.
 
     I will be looking to support more leagues soon.
 
@@ -21,10 +21,10 @@ const CoreIntentsSpeech = {
     What can I help you with today?
   `,
   Help: `
-    At the moment I can give you an update on the latest result and next fixture for any team in the Gallagher Premiership. Just say "Give me the next fixture" or "What was the last fixture".
+    At the moment, I can give you an update on the latest result and next fixture for any team in the Gallagher Premiership. Just say "Give me the next fixture" or "What was the last fixture".
   `,
   Goodbye: `
-    Goodbye!
+    Thanks for using the Rugby Guru. Goodbye!
   `,
   Fallback: `
     Sorry, I didn't understand that. Why don't you try saying it again?
