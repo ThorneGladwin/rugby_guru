@@ -27,7 +27,7 @@ module.exports = {
             if (teamSlotValues.values.length > 1) {
               const values = teamSlotValues.values.map(i => i.value.name);
               const lastOption = values.pop();
-              const possibleOptions = values.join(", ") + " and" + lastOption;
+              const possibleOptions = values.join(", ") + " and " + lastOption;
               return handlerInput.responseBuilder
                 .speak(CoreIntentsSpeech.MatchedMultipleTeams(possibleOptions))
                 .reprompt(CoreIntentsSpeech.MatchedMultipleTeams(possibleOptions))

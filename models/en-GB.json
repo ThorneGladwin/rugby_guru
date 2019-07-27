@@ -29,10 +29,29 @@
             {
               "name": "Teams",
               "type": "Teams",
-              "samples": ["{Teams}"]
+              "samples": [
+                "{Teams}"
+              ]
             }
           ],
           "samples": [
+            "for the next game",
+            "for the next match",
+            "for the next fixture",
+            "who is the next match for {Teams}",
+            "who is the next match",
+            "get me the next match for {Teams}",
+            "get me the next match",
+            "find me the next match",
+            "find me the next match for {Teams}",
+            "next match",
+            "next game",
+            "find the next fixture for {Teams}",
+            "find the next fixture",
+            "get me the next fixture",
+            "get me the next fixture for {Teams}",
+            "who will {Teams} play next",
+            "who will {Teams} be playing next",
             "what is the next fixture for {Teams}",
             "what is the next fixture",
             "what is the next game",
@@ -46,10 +65,17 @@
             {
               "name": "Teams",
               "type": "Teams",
-              "samples": ["{Teams} please", "{Teams} is my favourite team", "I want to set {Teams} as my favourite", "{Teams}"]
+              "samples": [
+                "{Teams} please",
+                "{Teams} is my favourite team",
+                "I want to set {Teams} as my favourite",
+                "{Teams}"
+              ]
             }
           ],
           "samples": [
+            "set {Teams} as the team I support",
+            "set {Teams} as my team",
             "save {Teams} as my favourite team",
             "save my favourite team",
             "set the team I support",
@@ -65,6 +91,11 @@
           "name": "GetFavouriteTeamIntent",
           "slots": [],
           "samples": [
+            "who's my team",
+            "who's the team I support",
+            "who's my favourite team",
+            "what's my team",
+            "who is my favourite team",
             "who I set as my favourite team",
             "what's the team I support",
             "what team do I support",
@@ -80,10 +111,30 @@
             {
               "name": "Teams",
               "type": "Teams",
-              "samples": ["{Teams}"]
+              "samples": [
+                "{Teams}"
+              ]
             }
           ],
           "samples": [
+            "get last game",
+            "get result",
+            "get score",
+            "get the latest score",
+            "get the latest game",
+            "get the latest result",
+            "for the latest game",
+            "for the latest result",
+            "for the last score",
+            "for the last result",
+            "for the last game",
+            "the last game",
+            "the last result",
+            "the last score",
+            "what's {Teams} last score",
+            "what is {Teams} last score",
+            "what's {Teams} last result",
+            "what is {Teams} last result",
             "who did {Teams} play last",
             "how did {Teams} do in their last game",
             "did {Teams} lose their last game",
@@ -102,35 +153,55 @@
       ],
       "types": [
         {
-          "name": "Teams",
           "values": [
             {
               "name": {
-                "value": "Worcester Warriors",
-                "synonyms": ["worcesters", "warriors", "worcester", "the warriors"]
+                "value": "London Irish",
+                "synonyms": [
+                  "london",
+                  "irish"
+                ]
               }
             },
             {
               "name": {
-                "value": "Saracens"
+                "value": "Worcester Warriors",
+                "synonyms": [
+                  "worcesters",
+                  "warriors",
+                  "worcester",
+                  "the warriors"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "Saracens",
+                "synonyms": [
+                  "london"
+                ]
               }
             },
             {
               "name": {
                 "value": "Sale Sharks",
-                "synonyms": ["sales", "sharks", "the sharks", "sale"]
-              }
-            },
-            {
-              "name": {
-                "value": "Newcastle Falcons",
-                "synonyms": ["newcastles", "falcons", "the falcons", "newcastle"]
+                "synonyms": [
+                  "sales",
+                  "sharks",
+                  "the sharks",
+                  "sale"
+                ]
               }
             },
             {
               "name": {
                 "value": "Leicester Tigers",
-                "synonyms": ["leicesters", "tigers", "the tigers", "leicester"]
+                "synonyms": [
+                  "leicesters",
+                  "tigers",
+                  "the tigers",
+                  "leicester"
+                ]
               }
             },
             {
@@ -141,40 +212,65 @@
             {
               "name": {
                 "value": "Gloucester",
-                "synonyms": ["gloucesters", "gloucester lions"]
+                "synonyms": [
+                  "gloucesters",
+                  "gloucester lions"
+                ]
               }
             },
             {
               "name": {
                 "value": "Exeter Chiefs",
-                "synonyms": ["exeters", "chiefs", "the chiefs", "exeter"]
+                "synonyms": [
+                  "exeters",
+                  "chiefs",
+                  "the chiefs",
+                  "exeter"
+                ]
               }
             },
             {
               "name": {
                 "value": "Bristol Bears",
-                "synonyms": ["bristols", "bears", "the bears", "bristol"]
+                "synonyms": [
+                  "bristols",
+                  "bears",
+                  "the bears",
+                  "bristol"
+                ]
               }
             },
             {
               "name": {
                 "value": "Bath",
-                "synonyms": ["baths"]
+                "synonyms": [
+                  "baths"
+                ]
               }
             },
             {
               "name": {
                 "value": "Wasps",
-                "synonyms": ["the wasps", "london wasps"]
+                "synonyms": [
+                  "london",
+                  "the wasps",
+                  "london wasps"
+                ]
               }
             },
             {
               "name": {
                 "value": "Northampton Saints",
-                "synonyms": ["northamptons", "the saints", "saints", "northampton"]
+                "synonyms": [
+                  "northamptons",
+                  "the saints",
+                  "saints",
+                  "northampton"
+                ]
               }
             }
-          ]
+          ],
+          "name": "Teams"
         }
       ]
     },
@@ -182,20 +278,20 @@
       "intents": [
         {
           "name": "NextFixtureIntent",
-          "delegationStrategy": "SKILL_RESPONSE",
           "confirmationRequired": false,
           "prompts": {},
           "slots": [
             {
               "name": "Teams",
               "type": "Teams",
-              "confirmationRequired": false,
               "elicitationRequired": true,
+              "confirmationRequired": false,
               "prompts": {
                 "elicitation": "Elicit.Slot.915367132704.436306799187"
               }
             }
-          ]
+          ],
+          "delegationStrategy": "SKILL_RESPONSE"
         },
         {
           "name": "SetFavouriteTeamIntent",
@@ -205,8 +301,8 @@
             {
               "name": "Teams",
               "type": "Teams",
-              "confirmationRequired": false,
               "elicitationRequired": true,
+              "confirmationRequired": false,
               "prompts": {
                 "elicitation": "Elicit.Slot.1170176477733.1019367016641"
               }
@@ -215,20 +311,20 @@
         },
         {
           "name": "LastResultIntent",
-          "delegationStrategy": "SKILL_RESPONSE",
           "confirmationRequired": false,
           "prompts": {},
           "slots": [
             {
               "name": "Teams",
               "type": "Teams",
-              "confirmationRequired": false,
               "elicitationRequired": true,
+              "confirmationRequired": false,
               "prompts": {
                 "elicitation": "Elicit.Slot.201086763920.1251245359428"
               }
             }
-          ]
+          ],
+          "delegationStrategy": "SKILL_RESPONSE"
         }
       ],
       "delegationStrategy": "ALWAYS"
@@ -262,5 +358,6 @@
         ]
       }
     ]
-  }
+  },
+  "version": "3"
 }
