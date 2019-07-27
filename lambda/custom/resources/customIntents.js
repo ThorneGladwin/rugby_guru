@@ -16,7 +16,8 @@ const NextFixtureIntentSpeech = {
   NextFixtureHome: (team, oppositeTeam, date, daysFromNow) =>
     `${team} next fixture is at home against ${oppositeTeam}. It will be played on ${date}, which is ${daysFromNow} days from now.`,
   NextFixtureAway: (team, oppositeTeam, date, daysFromNow) =>
-    `${team} next fixture is away against ${oppositeTeam}. It will be played on ${date}, which is ${daysFromNow} days from now.`
+    `${team} next fixture is away against ${oppositeTeam}. It will be played on ${date}, which is ${daysFromNow} days from now.`,
+  NoNextFixture: team => `Unfortunately there are no fixtures coming up for ${team} for this season.`
 };
 
 const LastResultIntentSpeech = {
@@ -34,7 +35,8 @@ const LastResultIntentSpeech = {
     `${team} played ${oppositeTeam} on ${date}. Unfortunately, I don't have a result yet. Please try again later.`,
   NoResultYetYesterday: (team, oppositeTeam) =>
     `${team} played ${oppositeTeam} yesterday. Unfortunately, I don't have a result yet. Please try again later.`,
-  NoResultYetToday: (team, oppositeTeam) => `${team} played ${oppositeTeam} today. Unfortunately, I don't have a result yet. Please try again later.`
+  NoResultYetToday: (team, oppositeTeam) => `${team} played ${oppositeTeam} today. Unfortunately, I don't have a result yet. Please try again later.`,
+  NoPreviousFixture: team => `Unfortunately there have been no previous fixtures for ${team} for this season.`
 };
 
 module.exports = {

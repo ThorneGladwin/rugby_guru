@@ -5,7 +5,7 @@ const LIST_OF_TEAMS = [
 "Gloucester",
 "Harlequins",
 "Leicester Tigers",
-"Newcastle Falcons",
+"London Irish",
 "Northampton Saints",
 "Sale Sharks",
 "Saracens",
@@ -28,7 +28,7 @@ const MONTHS = [
     "December"
 ];
 
-const PREM_FIXTURES_URL = 'https://en.wikipedia.org/wiki/2018%E2%80%9319_Premiership_Rugby';
+const PREM_FIXTURES_URL = 'https://en.wikipedia.org/wiki/2019%E2%80%9320_Premiership_Rugby';
 
 module.exports = {
     LIST_OF_TEAMS,
