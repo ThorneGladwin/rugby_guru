@@ -35,20 +35,6 @@ echo "Backup folder created on $localOrCloud for $SKILL_LAMBDA_FOLDER: $cloudBac
 cp -R "$codeFolder/." "$localBackupFolder"
 echo "If there are any problems, please check the backup folder: $localBackupFolder"
 
-# Get lambda function
-response=`aws lambda get-function --function-name $SKILL_LAMBDA_FUNCTION` 
-codeUrl=$(echo "$response" | grep Location | awk '{ print $2 }' | sed s/\"//g | sed s/,//g)
-echo "Downloading lambda code..."
-curl -o "$PWD/lambdaFunction.zip" $codeUrl
-
-echo "Cleaning folder ($codeFolder)..."
-rm -rf "$codeFolder"
-
-echo "Unziping code..."
-unzip -qq "$PWD/lambdaFunction.zip" -d "$codeFolder" 
-
-echo "Deleting temp..."
-rm -f "$PWD/lambdaFunction.zip"
+ask lambda download --function $SKILL_LAMBDA_FUNCTION --dest $localBackupFolder
 
 echo "Done!"
-
