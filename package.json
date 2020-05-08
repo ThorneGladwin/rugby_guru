@@ -4,14 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy:skill": "./scripts/deploy-skill.sh",
-    "deploy:model": "./scripts/deploy-model.sh",
-    "deploy:lambda": "./scripts/deploy-lambda.sh",
-    "deploy:all": "npm run deploy:skill && npm run deploy:model && npm run deploy:lambda",
-    "get:model": "./scripts/get-model.sh",
-    "get:lambda": "./scripts/get-lambda.sh",
-    "get:all": "npm run get:model && npm run get:lambda"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Thorne Gladwin",
   "license": "ISC",
