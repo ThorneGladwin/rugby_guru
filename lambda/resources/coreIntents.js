@@ -1,6 +1,6 @@
 const CoreIntentsSpeech = {
   FirstTimeIntroduction: `
-    Hi. welcome to the Rugby Guru. For now, I can give you an update on the latest result, and, next fixture for any team in the Gallagher Premiership.
+    Hi. Welcome to the Rugby Guru. For now, I can give you an update on the latest result, and, next fixture for any team in the Gallagher Premiership and Guinness Six Nations.
 
     I will be looking to support more leagues soon.
 
@@ -21,7 +21,7 @@ const CoreIntentsSpeech = {
     What can I help you with today?
   `,
   Help: `
-    At the moment, I can give you an update on the latest result and next fixture for any team in the Gallagher Premiership. Just say "Give me the next fixture" or "What was the last fixture".
+    At the moment, I can give you an update on the latest result and next fixture for any team in the Gallagher Premiership and Guinness Six Nations. Just say "Give me the next fixture" or "What was the last fixture".
   `,
   Goodbye: `
     Thanks for using the Rugby Guru. Goodbye!
