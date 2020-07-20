@@ -16,7 +16,7 @@
     "ask-sdk-model": "1.28.0",
     "cheerio": "1.0.0-rc.3",
     "date-fns": "1.30.1",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "request": "2.88.2",
     "request-promise": "4.2.5"
   }
